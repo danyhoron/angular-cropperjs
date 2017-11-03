@@ -1,7 +1,7 @@
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/common'), require('cropperjs')) :
 	typeof define === 'function' && define.amd ? define(['exports', '@angular/core', '@angular/common', 'cropperjs'], factory) :
-	(factory((global['angular-cropperjs'] = {}),global.core,global.common,global.Cropper));
+	(factory((global['angular-cropperjs/dist'] = {}),global.core,global.common,global.Cropper));
 }(this, (function (exports,core,common,Cropper) { 'use strict';
 
 /* tslint:disable */
