@@ -1,3 +1,4 @@
+/* tslint:disable */
 import { Component, Input, ViewChild, Output, EventEmitter, ElementRef, ViewEncapsulation } from '@angular/core';
 import * as Cropper from 'cropperjs/dist/cropper';
 
@@ -172,6 +173,9 @@ export class AngularCropperjsComponent {
             checkCrossOrigin: true
         }, this.cropperOptions);
 
+        if (this.cropper){
+            this.cropper.destroy();
+        }
         //
         // Set cropperjs
         this.cropper = new Cropper(image, this.cropperOptions);

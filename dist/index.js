@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, NgModule, Output, ViewChild, ViewEncaps
 import { CommonModule } from '@angular/common';
 import * as Cropper from 'cropperjs/dist/cropper';
 
+/* tslint:disable */
 var AngularCropperjsComponent = (function () {
     function AngularCropperjsComponent() {
         /*--------  View child elements  --------*/
@@ -64,6 +65,9 @@ var AngularCropperjsComponent = (function () {
             viewMode: 1,
             checkCrossOrigin: true
         }, this.cropperOptions);
+        if (this.cropper) {
+            this.cropper.destroy();
+        }
         //
         // Set cropperjs
         this.cropper = new Cropper(image, this.cropperOptions);

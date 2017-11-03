@@ -4,6 +4,7 @@
 	(factory((global['angular-cropperjs'] = {}),global.core,global.common,global.Cropper));
 }(this, (function (exports,core,common,Cropper) { 'use strict';
 
+/* tslint:disable */
 var AngularCropperjsComponent = (function () {
     function AngularCropperjsComponent() {
         /*--------  View child elements  --------*/
@@ -66,6 +67,9 @@ var AngularCropperjsComponent = (function () {
             viewMode: 1,
             checkCrossOrigin: true
         }, this.cropperOptions);
+        if (this.cropper) {
+            this.cropper.destroy();
+        }
         //
         // Set cropperjs
         this.cropper = new Cropper(image, this.cropperOptions);
