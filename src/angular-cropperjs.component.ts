@@ -132,26 +132,10 @@ export class AngularCropperjsComponent {
             image.crossOrigin = 'anonymous';
         }
 
+        image.removeEventListener('ready', this.imageReadyEvent);
         //
         // Image on ready event
-        image.addEventListener('ready', () => {
-            //
-            // Emit ready
-            this.ready.emit(true);
-
-            //
-            // Unset loading state
-            this.isLoading = false;
-
-            //
-            // Validate cropbox existance
-            if (this.cropbox) {
-
-                //
-                // Set cropbox data
-                this.cropper.setCropBoxData(this.cropbox);
-            }
-        });
+        image.addEventListener('ready', this.imageReadyEvent);
 
         //
         // Setup aspect ratio according to settings
@@ -173,12 +157,31 @@ export class AngularCropperjsComponent {
             checkCrossOrigin: true
         }, this.cropperOptions);
 
-        if (this.cropper){
+        if (this.cropper) {
             this.cropper.destroy();
         }
         //
         // Set cropperjs
         this.cropper = new Cropper(image, this.cropperOptions);
+    }
+
+    imageReadyEvent() {
+        //
+        // Emit ready
+        this.ready.emit(true);
+
+        //
+        // Unset loading state
+        this.isLoading = false;
+
+        //
+        // Validate cropbox existance
+        if (this.cropbox) {
+
+            //
+            // Set cropbox data
+            this.cropper.setCropBoxData(this.cropbox);
+        }
     }
 
     /**

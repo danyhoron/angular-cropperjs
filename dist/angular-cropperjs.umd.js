@@ -19,7 +19,6 @@ var AngularCropperjsComponent = (function () {
      * @return {?}
      */
     AngularCropperjsComponent.prototype.imageLoaded = function (ev) {
-        var _this = this;
         //
         // Unset load error state
         this.loadError = false;
@@ -32,23 +31,10 @@ var AngularCropperjsComponent = (function () {
         if (this.cropperOptions.checkCrossOrigin) {
             image.crossOrigin = 'anonymous';
         }
+        image.removeEventListener('ready', this.imageReadyEvent);
         //
         // Image on ready event
-        image.addEventListener('ready', function () {
-            //
-            // Emit ready
-            _this.ready.emit(true);
-            //
-            // Unset loading state
-            _this.isLoading = false;
-            //
-            // Validate cropbox existance
-            if (_this.cropbox) {
-                //
-                // Set cropbox data
-                _this.cropper.setCropBoxData(_this.cropbox);
-            }
-        });
+        image.addEventListener('ready', this.imageReadyEvent);
         //
         // Setup aspect ratio according to settings
         var /** @type {?} */ aspectRatio = NaN;
@@ -73,6 +59,24 @@ var AngularCropperjsComponent = (function () {
         //
         // Set cropperjs
         this.cropper = new Cropper(image, this.cropperOptions);
+    };
+    /**
+     * @return {?}
+     */
+    AngularCropperjsComponent.prototype.imageReadyEvent = function () {
+        //
+        // Emit ready
+        this.ready.emit(true);
+        //
+        // Unset loading state
+        this.isLoading = false;
+        //
+        // Validate cropbox existance
+        if (this.cropbox) {
+            //
+            // Set cropbox data
+            this.cropper.setCropBoxData(this.cropbox);
+        }
     };
     /**
      * Image load error

@@ -70,6 +70,7 @@ export declare class AngularCropperjsComponent {
      * @param {event} ev
      */
     imageLoaded(ev: Event): void;
+    imageReadyEvent(): void;
     /**
      * Image load error
      * @param {event} event
