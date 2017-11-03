@@ -168,7 +168,9 @@ export class AngularCropperjsComponent {
     imageReadyEvent() {
         //
         // Emit ready
-        this.ready.emit(true);
+        if (this.ready) {
+            this.ready.emit(true);
+        }
 
         //
         // Unset loading state

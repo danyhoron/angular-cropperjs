@@ -64,7 +64,9 @@ var AngularCropperjsComponent = (function () {
     AngularCropperjsComponent.prototype.imageReadyEvent = function () {
         //
         // Emit ready
-        this.ready.emit(true);
+        if (this.ready) {
+            this.ready.emit(true);
+        }
         //
         // Unset loading state
         this.isLoading = false;
